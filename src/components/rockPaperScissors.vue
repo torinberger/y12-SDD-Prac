@@ -2,17 +2,29 @@
   <div class="rockPaperScissors" v-bind:style="{ backgroundImage: background }">
     <div id="game">
         <div id="ally">
-            <div class="card" id="allyRock" v-bind:class="{ hide: hide.ally.rock, show: !hide.ally.rock  }" @click="cardSelect('rock')"></div>
-            <div class="card" id="allyPaper" v-bind:class="{ hide: hide.ally.paper, show: !hide.ally.paper }" @click="cardSelect('paper')"></div>
-            <div class="card" id="allyScissors" v-bind:class="{ hide: hide.ally.scissors, show: !hide.ally.scissors }" @click="cardSelect('scissors')"></div>
+            <div class="card" id="allyRock" v-bind:class="{ hide: hide.ally.rock, show: !hide.ally.rock  }" @click="cardSelect('rock')">
+              <img src="../assets/rps/rock.png" alt="">
+            </div>
+            <div class="card" id="allyPaper" v-bind:class="{ hide: hide.ally.paper, show: !hide.ally.paper }" @click="cardSelect('paper')">
+              <img src="../assets/rps/paper.png" alt="">
+            </div>
+            <div class="card" id="allyScissors" v-bind:class="{ hide: hide.ally.scissors, show: !hide.ally.scissors }" @click="cardSelect('scissors')">
+              <img src="../assets/rps/scissors.png" alt="">
+            </div>
         </div>
         <div id="vs">
             <h1>VS</h1>
         </div>
         <div id="enemy">
-            <div class="card" id="enemyRock" v-bind:class="{ hide: hide.enemy.rock, show: !hide.enemy.rock }"></div>
-            <div class="card" id="enemyPaper" v-bind:class="{ hide: hide.enemy.paper, show: !hide.enemy.paper }"></div>
-            <div class="card" id="enemyScissors" v-bind:class="{ hide: hide.enemy.scissors, show: !hide.enemy.scissors }"></div>
+            <div class="card" id="enemyRock" v-bind:class="{ hide: hide.enemy.rock, show: !hide.enemy.rock }">
+              <img src="../assets/rps/rock.png" alt="">
+            </div>
+            <div class="card" id="enemyPaper" v-bind:class="{ hide: hide.enemy.paper, show: !hide.enemy.paper }">
+              <img src="../assets/rps/paper.png" alt="">
+            </div>
+            <div class="card" id="enemyScissors" v-bind:class="{ hide: hide.enemy.scissors, show: !hide.enemy.scissors }">
+              <img src="../assets/rps/scissors.png" alt="">
+            </div>
         </div>
     </div>
   </div>
@@ -160,6 +172,9 @@ body {
   width: 10vw;
   height: 40vh;
   background: #9999ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
