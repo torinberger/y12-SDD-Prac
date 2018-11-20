@@ -6,6 +6,7 @@ import magic8Ball from '@/components/magic8Ball'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
