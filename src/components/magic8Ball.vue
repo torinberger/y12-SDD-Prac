@@ -22,25 +22,16 @@ function genRandomNum(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function genResult(number) {
-  if(number == 1) {
-    return "Not looking good...";
-  } else if(number == 2) {
-    return "Looking good!";
-  } else if(number == 3) {
-    return "Fate uncertain...";
-  } else if(number == 4) {
-    return "You are destined!";
-  } else if(number == 5) {
-    return "You should be scared...";
-  } else if(number == 6) {
-    return "Life is meaningless...";
-  } else if(number == 7) {
-    return "I'm busy...";
-  } else if(number == 8) {
-    return "Dont ask a ball!";
-  }
-}
+var potentialResults = [
+  "Not looking good...",
+  "Looking good!",
+  "Fate uncertain...",
+  "You are destined!",
+  "You should be scared...",
+  "Life is meaningless...",
+  "I'm busy...",
+  "Dont ask a ball!"
+]
 
 export default {
   name: 'magic8Ball',
@@ -58,8 +49,8 @@ export default {
   methods: {
     callBall() {
       this.doFade = false;
-      var randomNum =  Math.round(genRandomNum(1, 8));
-      var toDisplay = genResult(randomNum);
+      var randomNum =  Math.round(genRandomNum(0, potentialResults.length));
+      var toDisplay = potentialResults[randomNum];
       this.mood = randomNum;
       this.background = `linear-gradient(to bottom left, rgb(${this.mood*30}, 0, ${140}), rgb(${(this.mood*30)/2}, 0, ${20}))`
       this.result = toDisplay;
