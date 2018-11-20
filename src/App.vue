@@ -1,15 +1,25 @@
 <template>
   <div id="app">
     <div id="navbar">
+
       <router-link to="/">
       <img src="./assets/temp.png"></router-link>
-      <router-link to="/magic8Ball">
 
+      <router-link to="/magic8Ball">
       <img src="./assets/8ball.png" alt=""></router-link>
+
+      <router-link to="/rockPaperScissors">
+      <img src="./assets/rock.png" alt=""></router-link>
+
+      <router-link to="/subCipher">
+      <img src="./assets/locked.png" alt=""></router-link>
+
     </div>
+
     <transition name="router-anim">
       <router-view/>
     </transition>
+
   </div>
 </template>
 
