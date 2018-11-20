@@ -66,7 +66,7 @@ export default {
   name: 'tempConverter',
   data() {
     return {
-      background: 'linear-gradient(to top right, rgb(120, 120, 120), rgb(100, 100, 120))',
+      background: 'linear-gradient(to top right, rgb(160, 160, 160), rgb(100, 100, 120))',
       hide: {
         ally: {
           rock: false,
@@ -101,11 +101,11 @@ export default {
       var win = determineWinner(allyChoice, enemyChoice);
 
       if(win) {
-        this.background = 'linear-gradient(to top right, rgb(120, 120, 120), rgb(100, 200, 120))';
+        this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(100, 200, 120))';
       } else if(win == null) {
-        this.background = 'linear-gradient(to top right, rgb(120, 120, 120), rgb(100, 100, 120))';
+        this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(100, 100, 120))';
       } else {
-        this.background = 'linear-gradient(to top right, rgb(120, 120, 120), rgb(200, 100, 120))';
+        this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(200, 100, 120))';
       }
 
       setTimeout(() => {
@@ -175,6 +175,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 h1 {
