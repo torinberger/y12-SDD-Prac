@@ -48,8 +48,21 @@ export default {
   #navbar img {
     width: 8vh;
     height: 8vh;
-    -webkit-filter: invert(75%);
-    filter: invert(75%);
+    -webkit-filter: invert(50%);
+    filter: invert(50%);
+  }
+
+  #navbar img:hover {
+    -webkit-filter: invert(95%);
+    filter: invert(95%);
+    transition: 0.3s;
+  }
+
+  a {outline : none;}
+
+  .router-link-exact-active img {
+    -webkit-filter: invert(75%) !important;
+    filter: invert(75%) !important;
   }
 
   .router-anim-enter-active {
