@@ -38,9 +38,9 @@ export default {
   name: 'tempConverter',
   data() {
     return {
-     celcius: '0',
-     farenheit: '0',
-     background: 'linear-gradient(to bottom left, rgb(120, 120, 120), rgb(100, 100, 120))'
+      celcius: '0',
+      farenheit: '0',
+      background: 'linear-gradient(to bottom left, rgb(120, 120, 120), rgb(100, 100, 120))'
     }
   },
   created() {

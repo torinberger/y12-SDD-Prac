@@ -1,9 +1,15 @@
 <template>
   <div id="app">
     <div id="navbar">
+      <router-link to="/">
+      <img src="./assets/temp.png"></router-link>
+      <router-link to="/magic8Ball">
 
+      <img src="./assets/8ball.png" alt=""></router-link>
     </div>
-    <router-view/>
+    <transition name="router-anim">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -25,10 +31,54 @@ export default {
     width: 100vw;
     height: 100vh;
   }
+  body {
+    background: black;
+    overflow: hidden;
+  }
 
   #navbar {
     width: 100vw;
     height: 10vh;
     background: #302f30;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
   }
+
+  #navbar img {
+    width: 8vh;
+    height: 8vh;
+    -webkit-filter: invert(75%);
+    filter: invert(75%);
+  }
+
+  .router-anim-enter-active {
+    animation: coming 0.5s;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+  .router-anim-leave-active {
+    animation: going 0.5s;
+  }
+
+  @keyframes going {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50vw);
+      opacity: 0;
+    }
+  }
+  @keyframes coming {
+    from {
+      transform: translateX(50vw);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
 </style>
