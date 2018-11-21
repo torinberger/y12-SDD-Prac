@@ -30,7 +30,10 @@ var potentialResults = [
   "You should be scared...",
   "Life is meaningless...",
   "I'm busy...",
-  "Dont ask a ball!"
+  "Dont ask a ball!",
+  "Yes!",
+  "No!",
+  "Maybe..."
 ]
 
 export default {
