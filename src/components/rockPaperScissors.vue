@@ -171,7 +171,7 @@ body {
 .card {
   width: 10vw;
   height: 40vh;
-  background: #9999ff;
+  background: linear-gradient(to bottom, #7f7fff, #9999ff);
   display: flex;
   justify-content: center;
   align-items: center;
