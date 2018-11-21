@@ -1,31 +1,50 @@
 <template>
   <div class="rockPaperScissors" v-bind:style="{ backgroundImage: background }">
     <div id="game">
-        <div id="ally">
-            <div class="card" id="allyRock" v-bind:class="{ hide: hide.ally.rock, show: !hide.ally.rock  }" @click="cardSelect('rock')">
-              <img src="../assets/rps/rock.png" alt="">
-            </div>
-            <div class="card" id="allyPaper" v-bind:class="{ hide: hide.ally.paper, show: !hide.ally.paper }" @click="cardSelect('paper')">
-              <img src="../assets/rps/paper.png" alt="">
-            </div>
-            <div class="card" id="allyScissors" v-bind:class="{ hide: hide.ally.scissors, show: !hide.ally.scissors }" @click="cardSelect('scissors')">
-              <img src="../assets/rps/scissors.png" alt="">
-            </div>
+
+      <div id="ally">
+        <h2>Ally Score: {{ score.ally }}</h2>
+
+        <div class="cards">
+          <div class="card" id="allyRock" v-bind:class="{ hide: hide.ally.rock, show: !hide.ally.rock  }" @click="cardSelect('rock')">
+            <img src="../assets/rps/rock.png" alt="">
+          </div>
+          <div class="card" id="allyPaper" v-bind:class="{ hide: hide.ally.paper, show: !hide.ally.paper }" @click="cardSelect('paper')">
+            <img src="../assets/rps/paper.png" alt="">
+          </div>
+          <div class="card" id="allyScissors" v-bind:class="{ hide: hide.ally.scissors, show: !hide.ally.scissors }" @click="cardSelect('scissors')">
+            <img src="../assets/rps/scissors.png" alt="">
+          </div>
         </div>
-        <div id="vs">
-            <h1>VS</h1>
+      </div>
+      <div id="vs">
+          <h1>VS</h1>
+      </div>
+      <div id="enemy">
+
+        <h2>Enemy Score: {{ score.enemy }}</h2>
+
+        <div class="cards">
+          <div class="card enemyCard" id="enemyRock" v-bind:class="{ hide: hide.enemy.rock, show: !hide.enemy.rock }">
+            <img src="../assets/rps/rock.png" alt="">
+          </div>
+          <div class="card enemyCard" id="enemyPaper" v-bind:class="{ hide: hide.enemy.paper, show: !hide.enemy.paper }">
+            <img src="../assets/rps/paper.png" alt="">
+          </div>
+          <div class="card enemyCard" id="enemyScissors" v-bind:class="{ hide: hide.enemy.scissors, show: !hide.enemy.scissors }">
+            <img src="../assets/rps/scissors.png" alt="">
+          </div>
         </div>
-        <div id="enemy">
-            <div class="card" id="enemyRock" v-bind:class="{ hide: hide.enemy.rock, show: !hide.enemy.rock }">
-              <img src="../assets/rps/rock.png" alt="">
-            </div>
-            <div class="card" id="enemyPaper" v-bind:class="{ hide: hide.enemy.paper, show: !hide.enemy.paper }">
-              <img src="../assets/rps/paper.png" alt="">
-            </div>
-            <div class="card" id="enemyScissors" v-bind:class="{ hide: hide.enemy.scissors, show: !hide.enemy.scissors }">
-              <img src="../assets/rps/scissors.png" alt="">
-            </div>
-        </div>
+      </div>
+
+
+
+
+    </div>
+
+    <div id="resetContainer">
+
+      <button type="button" @click="reset">Reset Game</button>
     </div>
   </div>
 </template>
@@ -78,6 +97,10 @@ export default {
           paper: false,
           scissors: false
         }
+      },
+      score: {
+        ally: 0,
+        enemy: 0
       }
     }
   },
@@ -102,10 +125,12 @@ export default {
 
       if(win) {
         this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(100, 200, 120))';
+        this.score.ally++;
       } else if(win == null) {
         this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(100, 100, 120))';
       } else {
         this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(200, 100, 120))';
+        this.score.enemy++;
       }
 
       setTimeout(() => {
@@ -119,6 +144,11 @@ export default {
         this.hide.enemy.paper = false;
         this.hide.enemy.scissors = false;
       }, 1000)
+    },
+    reset() {
+      this.background = 'linear-gradient(to top right, rgb(160, 160, 160), rgb(100, 100, 120))';
+      this.score.ally = 0;
+      this.score.enemy = 0;
     }
   }
 }
@@ -136,33 +166,59 @@ body {
   width: 100vw;
   height: 90vh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 #game {
-  width: 90vw;
-  height: 90vh;
-  border: 1px solid black;
+  width: 100vw;
+  height: 85vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+#resetContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#resetContainer button {
+  margin-top: -20vh;
+  padding: 2vh;
+  border-radius: 3px;
+  width: 10vw;
+  background: linear-gradient(to right, #b266b2, #bf7fbf);
 }
 
 #ally {
   width: 35vw;
-  height: 60vh;
-  border: 1px solid blue;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  height: 70vh;
+  justify-content: center;
+}
+
+#ally h2 {
+  padding-top: 4vh;
+  width: 35vw;
+  height: 1vh;
+  text-align: center;
 }
 
 #enemy {
   width: 35vw;
+  height: 70vh;
+  justify-content: center;
+}
+
+#enemy h2 {
+  padding-top: 4vh;
+  width: 35vw;
+  height: 1vh;
+  text-align: center;
+}
+
+.cards {
+  width: 35vw;
   height: 60vh;
-  border: 1px solid red;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -176,6 +232,10 @@ body {
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.enemyCard {
+  background: linear-gradient(to bottom, #ff7f7f, #ff9999);
 }
 
 h1 {
