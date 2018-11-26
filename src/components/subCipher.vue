@@ -1,16 +1,111 @@
 <template>
   <div class="subCipher" v-bind:style="{ backgroundImage: background }">
-
+    <textarea id="cipherIn" @input="recieveInput" v-model="input" placeholder="encrypt"></textarea>
+    <span>=</span>
+    <textarea id="cipherIn" @input="receiveOutput" v-model="output" placeholder="decrypt"></textarea>
   </div>
 </template>
 
 <script>
 
+
+function sum(array) {
+  var total = 0;
+  for(var i = 0; i < array.length; i++) {
+    total += Number(array[i]);
+  }
+  return total;
+}
+
+function average(array) {
+  var length = array.length;
+  var arrSum = sum(array);
+  return arrSum / length;
+}
+
+function convertToASCII(string) {
+  var ASCII = [];
+  for(var i = 0; i < string.length; i++){
+    ASCII.push(string[i].charCodeAt());
+  }
+  return ASCII;
+}
+
+function convertToText(stringKeys) {
+  var text = [];
+  for(var i = 0; i < stringKeys.length; i++){
+    text.push(String.fromCharCode(stringKeys[i]));
+  }
+  return text.join('');
+}
+
+function moveUpChar(charKey) {
+  if(charKey == 32) { return 32; }
+  var char = charKey + 13;
+  if(char > 90) {
+    char -= 90;
+    if(char < 65) {
+      char += 65;
+    }
+  } else if(char < 65) {
+    char += 65;
+    if(char > 90) {
+      char -= 90;
+    }
+  }
+  return char;
+}
+
+function moveDownChar(charKey) {
+  if(charKey == 32) { return 32; }
+  var char = charKey - 13;
+  if(char < 90) {
+    char += 90;
+    if(char > 65) {
+      char -= 65;
+    }
+  } else if(char > 65) {
+    char -= 65;
+    if(char < 90) {
+      char += 90;
+    }
+  }
+  return char;
+}
+
+function encrypt(string) {
+  var stringKeys = convertToASCII(string);
+  for(var i = 0; i < stringKeys.length; i++) {
+    stringKeys[i] = moveUpChar(stringKeys[i])
+  }
+  return convertToText(stringKeys);
+}
+
+function decrypt(string) {
+  var stringKeys = convertToASCII(string);
+  for(var i = 0; i < stringKeys.length; i++) {
+    stringKeys[i] = moveDownChar(stringKeys[i])
+  }
+  return convertToText(stringKeys);
+}
+
 export default {
   name: 'tempConverter',
   data() {
     return {
-      background: 'white'
+      input: '',
+      background: `linear-gradient(to bottom left, rgb(${average(convertToASCII('a'))}, 0, ${140}), rgb(${average(convertToASCII('a'))}, 0, ${20}))`,
+      output: ''
+    }
+  },
+  methods: {
+    recieveInput() {
+      this.background = `linear-gradient(to bottom left, rgb(${average(convertToASCII(this.input))}, 0, ${140}), rgb(${average(convertToASCII(this.input))}, 0, ${20}))`
+      this.output = encrypt(this.input);
+    },
+    receiveOutput() {
+      this.background = `linear-gradient(to bottom left, rgb(${average(convertToASCII(this.output))}, 0, ${140}), rgb(${average(convertToASCII(this.output))}, 0, ${20}))`
+      this.input = decrypt(this.output);
     }
   }
 }
@@ -19,5 +114,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.subCipher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+span { color: white; font-size: 20vh; }
+
+textarea {
+  padding: 1vw;
+  font-size: 3vh;
+  height: 20vh;
+}
 
 </style>
