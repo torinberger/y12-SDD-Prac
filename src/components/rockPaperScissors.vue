@@ -17,11 +17,12 @@
           </div>
         </div>
       </div>
-      <div id="vs">
-          <h1>VS</h1>
-      </div>
-      <div id="enemy">
 
+      <div id="vs">
+        <h1>VS</h1>
+      </div>
+
+      <div id="enemy">
         <h2>Enemy Score: {{ score.enemy }}</h2>
 
         <div class="cards">
@@ -37,13 +38,9 @@
         </div>
       </div>
 
-
-
-
     </div>
 
     <div id="resetContainer">
-
       <button type="button" @click="reset">Reset Game</button>
     </div>
   </div>
