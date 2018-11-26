@@ -40,37 +40,27 @@ function convertToText(stringKeys) {
 }
 
 function moveUpChar(charKey) {
-  if(charKey == 32) { return 32; }
-  var char = charKey + 13;
-  if(char > 90) {
-    char -= 90;
-    if(char < 65) {
-      char += 65;
-    }
-  } else if(char < 65) {
-    char += 65;
-    if(char > 90) {
-      char -= 90;
-    }
+  if(charKey >= 65 && charKey <= 90) {
+    var char = charKey + 13;
+    return char > 90 ? char - 26 : char;
+  } else if(charKey >= 97 && charKey <= 122) {
+    var char = charKey + 13;
+    return char > 122 ? char - 26 : char;
+  } else {
+    return charKey
   }
-  return char;
 }
 
 function moveDownChar(charKey) {
-  if(charKey == 32) { return 32; }
-  var char = charKey - 13;
-  if(char < 90) {
-    char += 90;
-    if(char > 65) {
-      char -= 65;
-    }
-  } else if(char > 65) {
-    char -= 65;
-    if(char < 90) {
-      char += 90;
-    }
+  if(charKey >= 65 && charKey <= 90) {
+    var char = charKey - 13;
+    return char < 65 ? char + 26 : char;
+  } else if(charKey >= 97 && charKey <= 122) {
+    var char = charKey - 13;
+    return char < 97 ? char + 26 : char;
+  } else {
+    return charKey
   }
-  return char;
 }
 
 function encrypt(string) {
