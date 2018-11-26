@@ -1,8 +1,10 @@
 <template>
   <div class="subCipher" v-bind:style="{ backgroundImage: background }">
     <textarea id="cipherIn" @input="recieveInput" v-model="input" placeholder="encrypt"></textarea>
+    <input type="file" @change="onInputFile">
     <span>=</span>
     <textarea id="cipherIn" @input="receiveOutput" v-model="output" placeholder="decrypt"></textarea>
+    <input type="file" @change="onOutputFile">
   </div>
 </template>
 
@@ -96,6 +98,32 @@ export default {
     receiveOutput() {
       this.background = `linear-gradient(to bottom left, rgb(${average(convertToASCII(this.output))}, 0, ${140}), rgb(${average(convertToASCII(this.output))}, 0, ${20}))`
       this.input = decrypt(this.output);
+    },
+    onInputFile(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      const reader = new FileReader()
+
+      var self = this;
+      reader.onload = (event) => {
+        self.input = event.target.result;
+        self.recieveInput()
+      }
+
+      reader.onerror = error => reject(error)
+      reader.readAsText(files[0]) // you could also read images and other binaries
+    },
+    onOutputFile(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      const reader = new FileReader()
+
+      var self = this;
+      reader.onload = (event) => {
+        self.output = event.target.result;
+        self.receiveOutput()
+      }
+
+      reader.onerror = error => reject(error)
+      reader.readAsText(files[0]) // you could also read images and other binaries
     }
   }
 }
