@@ -14,6 +14,9 @@
       <router-link to="/subCipher">
       <img src="./assets/locked.png" alt=""></router-link>
 
+      <router-link to="/hangman">
+      <img src="./assets/noose.png" alt=""></router-link>
+
     </div>
 
     <transition name="router-anim">
