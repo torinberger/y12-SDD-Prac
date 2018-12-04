@@ -151,10 +151,10 @@ export default {
       reader.readAsText(files[0]) // you could also read images and other binaries
     },
     onOutDlFile() {
-
+      download('encrypted.txt', this.output);
     },
     onInpDlFile() {
-
+      download('decrypted.txt', this.input);
     }
   }
 }
