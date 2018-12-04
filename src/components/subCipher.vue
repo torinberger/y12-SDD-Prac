@@ -1,10 +1,22 @@
 <template>
   <div class="subCipher" v-bind:style="{ backgroundImage: background }">
-    <textarea id="cipherIn" @input="recieveInput" v-model="input" placeholder="encrypt"></textarea>
-    <input type="file" @change="onInputFile">
+    <div class="container">
+      <textarea id="cipherIn" @input="recieveInput" v-model="input" placeholder="encrypt"></textarea>
+      <div class="buttons">
+        <span>Upload File: </span><input type="file" @change="onInputFile">
+        <button @click="onInpDlFile">Download</button>
+      </div>
+
+    </div>
     <span>=</span>
-    <textarea id="cipherIn" @input="receiveOutput" v-model="output" placeholder="decrypt"></textarea>
-    <input type="file" @change="onOutputFile">
+    <div class="container">
+      <textarea id="cipherIn" @input="receiveOutput" v-model="output" placeholder="decrypt"></textarea>
+      <div class="buttons">
+        <span>Upload File: </span><input type="file" @change="onOutputFile" value="upload file">
+        <button @click="onOutDlFile">Download</button>
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -81,6 +93,19 @@ function decrypt(string) {
   return convertToText(stringKeys);
 }
 
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
 export default {
   name: 'tempConverter',
   data() {
@@ -124,6 +149,12 @@ export default {
 
       reader.onerror = error => reject(error)
       reader.readAsText(files[0]) // you could also read images and other binaries
+    },
+    onOutDlFile() {
+
+    },
+    onInpDlFile() {
+
     }
   }
 }
@@ -140,12 +171,38 @@ export default {
   height: 100vh;
 }
 
-span { color: white; font-size: 20vh; }
+span { color: white; font-size: 20vh; margin-top: -12.5vh;}
 
 textarea {
   padding: 1vw;
   font-size: 3vh;
   height: 20vh;
+}
+
+.buttons span {
+  font-size: 2vh;
+  margin: 1vw;
+  margin-top: 1.5vw;
+  margin-right: 0;
+}
+
+button, input[type="file"] {
+  height: 5vh;
+  width: 5vw;
+  background: white;
+  border: 0;
+  border-radius: 0;
+  margin: 1vw;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: -5vh;
+}
+
+.buttons {
+  display: flex;
 }
 
 </style>
