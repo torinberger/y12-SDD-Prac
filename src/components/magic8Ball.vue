@@ -52,7 +52,7 @@ export default {
   methods: {
     callBall() {
       this.doFade = false;
-      var randomNum =  Math.round(genRandomNum(0, potentialResults.length));
+      var randomNum =  Math.round(genRandomNum(0, potentialResults.length-1));
       var toDisplay = potentialResults[randomNum];
       this.mood = randomNum;
       this.background = `linear-gradient(to bottom left, rgb(${this.mood*30}, 0, ${140}), rgb(${(this.mood*30)/2}, 0, ${20}))`
