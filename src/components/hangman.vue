@@ -136,6 +136,7 @@ export default {
         }
       } else {
         this.lives--;
+        this.background = `linear-gradient(to bottom left, rgb(${this.lives*10}, 0, ${140}), rgb(${this.lives*10}, 0, ${20}))`
         if(this.lives == 0) {
           this.displayWord = this.fullWord.split("").join(" ");
         }
@@ -158,6 +159,7 @@ export default {
     this.fullWord = possibleWord[getRandomInt(possibleWord.length)];
     for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
     this.displayWord = string.split("").join(" ");
+    this.background = `linear-gradient(to bottom left, rgb(${this.lives*10}, 0, ${140}), rgb(${this.lives*10}, 0, ${20}))`
   }
 }
 
