@@ -43,7 +43,9 @@
           <button :disabled="tries.indexOf('z') >= 0 || lives == 0" @click="addChar('Z')" class="key">Z</button>
         </div>
         <div id="reset-container">
-          <button @click="reset()">RESET</button>
+          <button @click="resetEasy()">RESET EASY</button>
+          <button @click="resetMedium()">RESET MEDIUM</button>
+          <button @click="resetHard()">RESET HARD</button>
         </div>
     </div>
   </div>
@@ -52,25 +54,58 @@
 <script>
 
 
-var possibleWord = ['ability',
-'able',
-'about',
-'above',
-'accept',
-'according',
-'account',
-'across',
-'act',
-'action',
-'activity',
-'actually',
-'add',
-'address',
-'administration',
-'admit',
-'adult',
-'affect',
-'after']
+var easy = [
+  'able',
+  'about',
+  'above',
+  'accept',
+  'across',
+  'act',
+  'action',
+  'add',
+  'admit',
+  'adult',
+  'affect',
+  'after',
+  'blaring',
+  'blushed',
+  'booked',
+  'cereal'
+]
+
+var medium = [
+  'ability',
+  'account',
+  'activity',
+  'actually',
+  'address',
+  'according',
+  'administration',
+  'chimpanzee',
+  'chimpanzees',
+  'chimps',
+  'chin',
+  'china',
+  'chinese',
+  'chink',
+  'chinked',
+  'chinking',
+  'chinks',
+  'chinless'
+]
+
+var hard = [
+  'abomasum',
+  'absquatulate',
+  'adscititious',
+  'albertopolis',
+  'amphisbaena',
+  'anguilliform',
+  'breatharian',
+  'callithumpian',
+  'floccinaucinihilipilification',
+  'bridgebuilding'
+]
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -143,20 +178,33 @@ export default {
       }
     },
     reset() {
-      var string = "";
       this.lives = 6;
       this.charInputs = [];
       this.tries = [];
       this.displayWord = "";
-
-      this.fullWord = possibleWord[getRandomInt(possibleWord.length)];
+    },
+    resetEasy() {
+      var string = "";
+      this.fullWord = easy[getRandomInt(easy.length)];
+      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
+      this.displayWord = string.split("").join(" ");
+    },
+    resetMedium() {
+      var string = "";
+      this.fullWord = medium[getRandomInt(medium.length)];
+      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
+      this.displayWord = string.split("").join(" ");
+    },
+    resetHard() {
+      var string = "";
+      this.fullWord = hard[getRandomInt(hard.length)];
       for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
       this.displayWord = string.split("").join(" ");
     }
   },
   created() {
     var string = "";
-    this.fullWord = possibleWord[getRandomInt(possibleWord.length)];
+    this.fullWord = medium[getRandomInt(medium.length)];
     for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
     this.displayWord = string.split("").join(" ");
     this.background = `linear-gradient(to bottom left, rgb(${this.lives*10}, 0, ${140}), rgb(${this.lives*10}, 0, ${20}))`
@@ -215,7 +263,7 @@ h1 {
 }
 
 #reset-container button {
-  width: 6vw;
+  width: 12vw;
   height: 2vw;
   font-size: 3vh;
   border-radius: 2px;
