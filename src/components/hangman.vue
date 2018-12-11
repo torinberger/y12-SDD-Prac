@@ -184,6 +184,7 @@ export default {
 }
 
 h1 {
+  padding-top: 5vh;
   text-align: center;
   font-size: 5vh;
   margin: 10px;
@@ -214,8 +215,9 @@ h1 {
 }
 
 #reset-container button {
-  width: 3vw;
-  height: 1.5vw;
+  width: 6vw;
+  height: 2vw;
+  font-size: 3vh;
   border-radius: 2px;
   margin: 5px;
   background: black;
@@ -227,10 +229,11 @@ h1 {
 }
 
 .key {
-  width: 2vw;
-  height: 1.5vw;
+  width: 5vw;
+  height: 2vw;
   border-radius: 2px;
   margin: 5px;
+  font-size: 3vh;
   background: #e0e0e0;
 }
 
