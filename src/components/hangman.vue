@@ -15,37 +15,37 @@
           <h2 id="word"> {{ displayWord }} </h2>
         </div>
         <div id="keys-container">
-          <button :disabled="tries.indexOf('a') >= 0 || lives == 0" @click="addChar('A')" class="key">A</button>
-          <button :disabled="tries.indexOf('b') >= 0 || lives == 0" @click="addChar('B')" class="key">B</button>
-          <button :disabled="tries.indexOf('c') >= 0 || lives == 0" @click="addChar('C')" class="key">C</button>
-          <button :disabled="tries.indexOf('d') >= 0 || lives == 0" @click="addChar('D')" class="key">D</button>
-          <button :disabled="tries.indexOf('e') >= 0 || lives == 0" @click="addChar('E')" class="key">E</button>
-          <button :disabled="tries.indexOf('f') >= 0 || lives == 0" @click="addChar('F')" class="key">F</button>
-          <button :disabled="tries.indexOf('g') >= 0 || lives == 0" @click="addChar('G')" class="key">G</button>
-          <button :disabled="tries.indexOf('h') >= 0 || lives == 0" @click="addChar('H')" class="key">H</button>
-          <button :disabled="tries.indexOf('i') >= 0 || lives == 0" @click="addChar('I')" class="key">I</button>
-          <button :disabled="tries.indexOf('j') >= 0 || lives == 0" @click="addChar('J')" class="key">J</button>
-          <button :disabled="tries.indexOf('k') >= 0 || lives == 0" @click="addChar('K')" class="key">K</button>
-          <button :disabled="tries.indexOf('l') >= 0 || lives == 0" @click="addChar('L')" class="key">L</button>
-          <button :disabled="tries.indexOf('m') >= 0 || lives == 0" @click="addChar('M')" class="key">M</button>
-          <button :disabled="tries.indexOf('n') >= 0 || lives == 0" @click="addChar('N')" class="key">N</button>
-          <button :disabled="tries.indexOf('o') >= 0 || lives == 0" @click="addChar('O')" class="key">O</button>
-          <button :disabled="tries.indexOf('p') >= 0 || lives == 0" @click="addChar('P')" class="key">P</button>
-          <button :disabled="tries.indexOf('q') >= 0 || lives == 0" @click="addChar('Q')" class="key">Q</button>
-          <button :disabled="tries.indexOf('r') >= 0 || lives == 0" @click="addChar('R')" class="key">R</button>
-          <button :disabled="tries.indexOf('s') >= 0 || lives == 0" @click="addChar('S')" class="key">S</button>
-          <button :disabled="tries.indexOf('t') >= 0 || lives == 0" @click="addChar('T')" class="key">T</button>
-          <button :disabled="tries.indexOf('u') >= 0 || lives == 0" @click="addChar('U')" class="key">U</button>
-          <button :disabled="tries.indexOf('v') >= 0 || lives == 0" @click="addChar('V')" class="key">V</button>
-          <button :disabled="tries.indexOf('w') >= 0 || lives == 0" @click="addChar('W')" class="key">W</button>
-          <button :disabled="tries.indexOf('x') >= 0 || lives == 0" @click="addChar('X')" class="key">X</button>
-          <button :disabled="tries.indexOf('y') >= 0 || lives == 0" @click="addChar('Y')" class="key">Y</button>
-          <button :disabled="tries.indexOf('z') >= 0 || lives == 0" @click="addChar('Z')" class="key">Z</button>
+          <button :disabled="tries.indexOf('a') >= 0 || lives == 0 || won" @click="addChar('A')" class="key">A</button>
+          <button :disabled="tries.indexOf('b') >= 0 || lives == 0 || won" @click="addChar('B')" class="key">B</button>
+          <button :disabled="tries.indexOf('c') >= 0 || lives == 0 || won" @click="addChar('C')" class="key">C</button>
+          <button :disabled="tries.indexOf('d') >= 0 || lives == 0 || won" @click="addChar('D')" class="key">D</button>
+          <button :disabled="tries.indexOf('e') >= 0 || lives == 0 || won" @click="addChar('E')" class="key">E</button>
+          <button :disabled="tries.indexOf('f') >= 0 || lives == 0 || won" @click="addChar('F')" class="key">F</button>
+          <button :disabled="tries.indexOf('g') >= 0 || lives == 0 || won" @click="addChar('G')" class="key">G</button>
+          <button :disabled="tries.indexOf('h') >= 0 || lives == 0 || won" @click="addChar('H')" class="key">H</button>
+          <button :disabled="tries.indexOf('i') >= 0 || lives == 0 || won" @click="addChar('I')" class="key">I</button>
+          <button :disabled="tries.indexOf('j') >= 0 || lives == 0 || won" @click="addChar('J')" class="key">J</button>
+          <button :disabled="tries.indexOf('k') >= 0 || lives == 0 || won" @click="addChar('K')" class="key">K</button>
+          <button :disabled="tries.indexOf('l') >= 0 || lives == 0 || won" @click="addChar('L')" class="key">L</button>
+          <button :disabled="tries.indexOf('m') >= 0 || lives == 0 || won" @click="addChar('M')" class="key">M</button>
+          <button :disabled="tries.indexOf('n') >= 0 || lives == 0 || won" @click="addChar('N')" class="key">N</button>
+          <button :disabled="tries.indexOf('o') >= 0 || lives == 0 || won" @click="addChar('O')" class="key">O</button>
+          <button :disabled="tries.indexOf('p') >= 0 || lives == 0 || won" @click="addChar('P')" class="key">P</button>
+          <button :disabled="tries.indexOf('q') >= 0 || lives == 0 || won" @click="addChar('Q')" class="key">Q</button>
+          <button :disabled="tries.indexOf('r') >= 0 || lives == 0 || won" @click="addChar('R')" class="key">R</button>
+          <button :disabled="tries.indexOf('s') >= 0 || lives == 0 || won" @click="addChar('S')" class="key">S</button>
+          <button :disabled="tries.indexOf('t') >= 0 || lives == 0 || won" @click="addChar('T')" class="key">T</button>
+          <button :disabled="tries.indexOf('u') >= 0 || lives == 0 || won" @click="addChar('U')" class="key">U</button>
+          <button :disabled="tries.indexOf('v') >= 0 || lives == 0 || won" @click="addChar('V')" class="key">V</button>
+          <button :disabled="tries.indexOf('w') >= 0 || lives == 0 || won" @click="addChar('W')" class="key">W</button>
+          <button :disabled="tries.indexOf('x') >= 0 || lives == 0 || won" @click="addChar('X')" class="key">X</button>
+          <button :disabled="tries.indexOf('y') >= 0 || lives == 0 || won" @click="addChar('Y')" class="key">Y</button>
+          <button :disabled="tries.indexOf('z') >= 0 || lives == 0 || won" @click="addChar('Z')" class="key">Z</button>
         </div>
         <div id="reset-container">
-          <button @click="resetEasy()">RESET EASY</button>
-          <button @click="resetMedium()">RESET MEDIUM</button>
-          <button @click="resetHard()">RESET HARD</button>
+          <button @click="reset(); resetEasy();">RESET EASY</button>
+          <button @click="reset(); resetMedium();">RESET MEDIUM</button>
+          <button @click="reset(); resetHard();">RESET HARD</button>
         </div>
     </div>
   </div>
@@ -154,6 +154,7 @@ export default {
       fullWord: "accept",
       charInputs: [],
       tries: [],
+      won: false,
       displayWord: "",
       background: "linear-gradient(to bottom left, rgb(0, 0, 140), rgb(0, 0, 20))"
     }
@@ -168,6 +169,7 @@ export default {
         this.displayWord = displayInput(this.fullWord, this.charInputs);
         if(isWin(this.fullWord, this.charInputs)) {
           this.displayWord = this.fullWord.split("").join(" ");
+          this.won = true;
         }
       } else {
         this.lives--;
@@ -182,6 +184,7 @@ export default {
       this.charInputs = [];
       this.tries = [];
       this.displayWord = "";
+      this.won = false;
     },
     resetEasy() {
       var string = "";
