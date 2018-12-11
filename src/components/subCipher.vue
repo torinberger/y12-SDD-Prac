@@ -3,7 +3,7 @@
     <div class="container">
       <textarea id="cipherIn" @input="recieveInput" v-model="input" placeholder="encrypt"></textarea>
       <div class="buttons">
-        <span>Upload File: </span><input type="file" @change="onInputFile">
+        <input type="file" @change="onInputFile">
         <button @click="onInpDlFile">Download</button>
       </div>
 
@@ -12,7 +12,7 @@
     <div class="container">
       <textarea id="cipherIn" @input="receiveOutput" v-model="output" placeholder="decrypt"></textarea>
       <div class="buttons">
-        <span>Upload File: </span><input type="file" @change="onOutputFile" value="upload file">
+        <input type="file" @change="onOutputFile" value="upload file">
         <button @click="onOutDlFile">Download</button>
       </div>
 
@@ -186,13 +186,18 @@ textarea {
   margin-right: 0;
 }
 
-button, input[type="file"] {
+button {
   height: 5vh;
   width: 5vw;
   background: white;
   border: 0;
   border-radius: 0;
   margin: 1vw;
+}
+
+input[type="file"] {
+  margin-top: 1.5vw;
+  color: white;
 }
 
 .container {
