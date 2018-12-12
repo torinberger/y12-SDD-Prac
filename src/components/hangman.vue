@@ -180,7 +180,7 @@ export default {
         }
       } else {
         this.lives--;
-        this.background = `linear-gradient(to bottom left, rgb(${this.lives*10}, 0, ${140}), rgb(${this.lives*10}, 0, ${20}))`
+        this.background = `linear-gradient(to bottom left, rgb(${this.lives*50}, 0, ${140}), rgb(${this.lives*50}, 0, ${20}))`
         if(this.lives == 0) {
           this.displayWord = this.fullWord.split("").join(" ");
           this.losses++;
@@ -193,6 +193,7 @@ export default {
       this.tries = [];
       this.displayWord = "";
       this.won = false;
+      this.background = `linear-gradient(to bottom left, rgb(${this.lives*50}, 0, ${140}), rgb(${this.lives*50}, 0, ${20}))`
     },
     resetScore() {
       this.wins = 0;
@@ -222,7 +223,7 @@ export default {
     this.fullWord = medium[getRandomInt(medium.length)];
     for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
     this.displayWord = string.split("").join(" ");
-    this.background = `linear-gradient(to bottom left, rgb(${this.lives*10}, 0, ${140}), rgb(${this.lives*10}, 0, ${20}))`
+    this.background = `linear-gradient(to bottom left, rgb(${this.lives*50}, 0, ${140}), rgb(${this.lives*50}, 0, ${20}))`
   }
 }
 
