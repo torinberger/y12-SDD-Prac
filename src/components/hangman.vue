@@ -1,11 +1,19 @@
 <template>
+  <!-- containing div of component w/dynamic background -->
   <div class="hangman" v-bind:style="{ backgroundImage: background }">
+    <!-- game container -->
     <div id="container">
+
       <div id="score-container">
+        <!-- format and display score -->
         <h2>{{ wins }} - {{ losses }}</h2>
+        <!-- reset score button w/click event -->
         <button type="button" @click="resetScore()">RESET SCORE</button>
       </div>
+
       <h1>Hangman</h1>
+
+      <!-- dynamically display the correct hangman diagram dependent on lives -->
       <div id="image-container">
         <img v-if="lives == 6" src="../assets/hangman/Hangman-0.png" alt="">
         <img v-if="lives == 5" src="../assets/hangman/Hangman-1.png" alt="">
@@ -15,10 +23,15 @@
         <img v-if="lives == 1" src="../assets/hangman/Hangman-5.png" alt="">
         <img v-if="lives == 0" src="../assets/hangman/Hangman-6.png" alt="">
       </div>
+
+      <!-- display hidden word and slowly reveal -->
       <div id="word-container">
         <h2 id="word"> {{ displayWord }} </h2>
       </div>
+
+      <!-- container for all alphabetical keys -->
       <div id="keys-container">
+        <!-- dynamic css & disabling buttons w/click events -->
         <button :disabled="tries.indexOf('a') >= 0 || lives == 0 || won" @click="addChar('A')" class="key">A</button>
         <button :disabled="tries.indexOf('b') >= 0 || lives == 0 || won" @click="addChar('B')" class="key">B</button>
         <button :disabled="tries.indexOf('c') >= 0 || lives == 0 || won" @click="addChar('C')" class="key">C</button>
@@ -46,18 +59,21 @@
         <button :disabled="tries.indexOf('y') >= 0 || lives == 0 || won" @click="addChar('Y')" class="key">Y</button>
         <button :disabled="tries.indexOf('z') >= 0 || lives == 0 || won" @click="addChar('Z')" class="key">Z</button>
       </div>
-      <div id="reset-container">
-        <button @click="reset(); resetEasy();">NEW GAME EASY</button>
-        <button @click="reset(); resetMedium();">NEW GAME MEDIUM</button>
-        <button @click="reset(); resetHard();">NEW GAME HARD</button>
+
+      <!-- new game buttons -->
+      <div id="new-game-container">
+        <button @click="newGame(); newGameEasy();">NEW GAME EASY</button>
+        <button @click="newGame(); newGameMedium();">NEW GAME MEDIUM</button>
+        <button @click="newGame(); newGameHard();">NEW GAME HARD</button>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
 
-
+// easy words
 var easy = [
   'able',
   'about',
@@ -77,6 +93,7 @@ var easy = [
   'cereal'
 ]
 
+// medium words
 var medium = [
   'ability',
   'account',
@@ -98,6 +115,7 @@ var medium = [
   'chinless'
 ]
 
+// hard words
 var hard = [
   'abomasum',
   'absquatulate',
@@ -111,83 +129,94 @@ var hard = [
   'bridgebuilding'
 ]
 
+// get random int from 0-max
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function displayInput(word, inputs) {
-  var string = "";
-  for(var i = 0; i < word.length; i++) { string += "_"; }
+// clean input and hide un-guessed letters
+function cleanInput(word, inputs) {
+  var string = ""; // create placeholder string
+  for(var i = 0; i < word.length; i++) { string += "_"; } // fill with underscores
 
-  var inWord = word;
+  var inWord = word; // create placeholder word
   for(var n = 0; n < inputs.length; n++) {
-    var rex = new RegExp(String(inputs[n]), "g");
-    inWord = inWord.replace(rex, "1")
+    var rex = new RegExp(String(inputs[n]), "g"); // get regex that targets all iterated characters
+    inWord = inWord.replace(rex, "1"); // replace iterated character with placeholder '1'
   }
 
-  for(var k = 0; k < inWord.length; k++) {
-    if(inWord[k] == '1') {
-      var arr = string.split("");
+  for(var k = 0; k < inWord.length; k++) { // go through placeholder word
+    if(inWord[k] == '1') { // check if letter guessed
+      var arr = string.split(""); // if so reveal the letter
           arr[k] = word[k];
           string = arr.join("");
     }
   }
 
-  return string.split("").join(" ");
+  return string.split("").join(" "); // show the hidden/revealed letters w/a space inbetween
 }
 
+// check if a token is in a string
 function isCorrect(string, token) {
-  for(var i = 0; i < string.length; i++) {
+  for(var i = 0; i < string.length; i++) { // loop through string
     if(string[i] == token) { return true; }
   }
-  return false;
+  return false; // if token not in string return false
 }
 
+// check if all string's characters are in tokens
 function isWin(string, tokens) {
-  for(var i = 0; i < string.length; i++) {
-    if(tokens.indexOf(string[i]) == -1) { return false; }
+  for(var i = 0; i < string.length; i++) { // loop through string
+    if(tokens.indexOf(string[i]) == -1) { return false; } // if character not on tokens
   }
-  return true;
+  return true; // all string's characters in tokens
 }
 
-export default {
+export default { // vue instance
   name: "hangman",
   data() {
-    return {
-      lives: 6,
-      wins: 0,
-      losses: 0,
-      fullWord: "accept",
-      charInputs: [],
-      tries: [],
-      won: false,
-      displayWord: "",
-      background: "linear-gradient(to bottom left, rgb(0, 0, 140), rgb(0, 0, 20))"
+    return { // vue variables
+      lives: 6, // player lives
+      wins: 0, // player wins
+      losses: 0, // player losses
+      fullWord: "l o a d i n g . . .", // word to guess
+      charInputs: [], // array of all inputs
+      tries: [], // array of all tried characters
+      won: false, // won boolean
+      displayWord: "", // word to display
+      background: "linear-gradient(to bottom left, rgb(0, 0, 140), rgb(0, 0, 20))" // dynamic background
     }
   },
   methods: {
-    addChar(inChar) {
-      inChar = inChar.toLowerCase();
-      this.tries.push(inChar);
-      var win = isCorrect(this.fullWord, inChar);
-      if(win) {
-        this.charInputs.push(inChar);
-        this.displayWord = displayInput(this.fullWord, this.charInputs);
-        if(isWin(this.fullWord, this.charInputs)) {
-          this.displayWord = this.fullWord.split("").join(" ");
+    addChar(inChar) { // when a letter clicked
+      inChar = inChar.toLowerCase(); // make char lowercase
+      this.tries.push(inChar); // add char to tries
+      var win = isCorrect(this.fullWord, inChar); // check if guess correct
+
+      if(win) { // if guess correct
+        this.charInputs.push(inChar); // add to char
+        this.displayWord = cleanInput(this.fullWord, this.charInputs); // show revealed letters
+
+        if(isWin(this.fullWord, this.charInputs)) { // check if user completed word
+          this.displayWord = this.fullWord.split("").join(" "); // show full word
           this.won = true;
-          this.wins++;
+          this.wins++; // increase score
         }
-      } else {
-        this.lives--;
+      } else { // if guess incorrect
+        this.lives--; // reduce lives & change hangman pic
+        // change dymanic background
         this.background = `linear-gradient(to bottom left, rgb(${this.lives*50}, 0, ${140}), rgb(${this.lives*50}, 0, ${20}))`
+
+        // if hangman complete
         if(this.lives == 0) {
+          // show full word
           this.displayWord = this.fullWord.split("").join(" ");
-          this.losses++;
+          this.losses++; // increase losses score
         }
       }
     },
-    reset() {
+    newGame() { // if new game made
+      // reset all vue variables to default
       this.lives = 6;
       this.charInputs = [];
       this.tries = [];
@@ -195,34 +224,37 @@ export default {
       this.won = false;
       this.background = `linear-gradient(to bottom left, rgb(${this.lives*50}, 0, ${140}), rgb(${this.lives*50}, 0, ${20}))`
     },
-    resetScore() {
+    resetScore() { // reset scores
       this.wins = 0;
       this.losses = 0;
     },
-    resetEasy() {
-      var string = "";
-      this.fullWord = easy[getRandomInt(easy.length)];
-      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
-      this.displayWord = string.split("").join(" ");
+    newGameEasy() { // set word to easy word
+      var string = ""; // placeholder string
+      this.fullWord = easy[getRandomInt(easy.length)]; // get word
+      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; } // hide letters
+      this.displayWord = string.split("").join(" "); // show underscores with spacing
     },
-    resetMedium() {
-      var string = "";
-      this.fullWord = medium[getRandomInt(medium.length)];
-      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
-      this.displayWord = string.split("").join(" ");
+    newGameMedium() { // set word to medium word
+      var string = ""; // placeholder string
+      this.fullWord = medium[getRandomInt(medium.length)]; // get word
+      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; } // hide letters
+      this.displayWord = string.split("").join(" "); // show underscores with spacing
     },
-    resetHard() {
-      var string = "";
-      this.fullWord = hard[getRandomInt(hard.length)];
-      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
-      this.displayWord = string.split("").join(" ");
+    newGameHard() { // set word to hard word
+      var string = ""; // placeholder string
+      this.fullWord = hard[getRandomInt(hard.length)]; // get word
+      for(var i = 0; i < this.fullWord.length; i++) { string += "_"; } // hide letters
+      this.displayWord = string.split("").join(" "); // show underscores with spacing
     }
   },
-  created() {
-    var string = "";
-    this.fullWord = medium[getRandomInt(medium.length)];
-    for(var i = 0; i < this.fullWord.length; i++) { string += "_"; }
-    this.displayWord = string.split("").join(" ");
+  created() { // when program loaded
+    // set up medium game
+    var string = ""; // placeholder string
+    this.fullWord = medium[getRandomInt(medium.length)]; // get medium word
+    for(var i = 0; i < this.fullWord.length; i++) { string += "_"; } // hide letters
+    this.displayWord = string.split("").join(" "); // display hidden letters
+
+    // dynamically update background
     this.background = `linear-gradient(to bottom left, rgb(${this.lives*50}, 0, ${140}), rgb(${this.lives*50}, 0, ${20}))`
   }
 }
@@ -231,6 +263,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+/* # containers # */
 
 .hangman {
   width: 100vw;
@@ -254,26 +288,6 @@ export default {
   margin-top: 2vw;
 }
 
-#score-container button {
-  width: 15vw;
-  height: 2vw;
-  font-size: 3vh;
-  border-radius: 2px;
-  margin: 5px;
-  background: black;
-  color: white;
-}
-
-#score-container button:hover {
-  background: grey;
-}
-
-h1 {
-  padding-top: 12vh;
-  text-align: center;
-  font-size: 5vh;
-  margin: 10px;
-}
 
 #image-container {
   width: 100%;
@@ -290,7 +304,7 @@ h1 {
   justify-content: center;
 }
 
-#reset-container {
+#new-game-container {
   margin-top: 10px;
   width: 80%;
   padding-left: 10%;
@@ -299,7 +313,23 @@ h1 {
   justify-content: center;
 }
 
-#reset-container button {
+/* # inputs # */
+
+#score-container button {
+  width: 15vw;
+  height: 2vw;
+  font-size: 3vh;
+  border-radius: 2px;
+  margin: 5px;
+  background: black;
+  color: white;
+}
+
+#score-container button:hover {
+  background: grey;
+}
+
+#new-game-container button {
   width: 20vw;
   height: 2vw;
   font-size: 3vh;
@@ -309,7 +339,7 @@ h1 {
   color: white;
 }
 
-#reset-container button:hover {
+#new-game-container button:hover {
   background: grey;
 }
 
@@ -326,14 +356,22 @@ h1 {
   background: grey;
 }
 
-#word {
-  text-align: center;
-}
-
 .key:disabled {
   background: black;
   color: white;
 }
 
+/* # text # */
+
+h1 {
+  padding-top: 12vh;
+  text-align: center;
+  font-size: 5vh;
+  margin: 10px;
+}
+
+#word {
+  text-align: center;
+}
 
 </style>
