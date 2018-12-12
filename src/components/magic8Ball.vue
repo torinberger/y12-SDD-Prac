@@ -1,12 +1,16 @@
 <template>
+  <!-- containing div of component w/dynamic background -->
   <div class="magic8Ball" v-bind:style="{ backgroundImage: background }">
+    <!-- magic 8 ball w/ click event -->
     <div id="ball" @click="callBall">
+      <!-- css divs for looks -->
       <div id="viewHole">
-          <div id="resultHole">
-              <div id="triangle">
-                  <p id="result" v-if="doFade" v-bind:class="{ fadeInClass: doFade }">{{ result }}</p>
-              </div>
+        <div id="resultHole">
+          <div id="triangle">
+            <!-- result container w/animation -->
+            <p id="result" v-if="doFade" v-bind:class="{ fadeInClass: doFade }">{{ result }}</p>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -14,14 +18,12 @@
 
 <script>
 
-function round(n) {
-  return Math.round((n + 0.00001) * 10) / 10;
-}
-
+// generate random number in range
 function genRandomNum(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+// array containing all potential results
 var potentialResults = [
   "Not looking good...",
   "Looking good!",
@@ -36,30 +38,35 @@ var potentialResults = [
   "Maybe..."
 ]
 
-export default {
+export default { // vue instance
   name: 'magic8Ball',
   data() {
-    return {
-     mood: 1,
-     background: 'linear-gradient(to top right, rgb(120, 120, 120), rgb(100, 100, 120))',
-     result: 'Click Me!',
-     doFade: true
+    return { // vue variables
+      mood: 1, // mood to change background
+      background: 'linear-gradient(to top right, rgb(120, 120, 120), rgb(100, 100, 120))', // dynamic background
+      result: 'Click Me!',
+      doFade: true
     }
   },
-  created() {
+  created() { // dynamicly update background when created
     this.background = `linear-gradient(to bottom left, rgb(${this.mood*40}, 0, ${140}), rgb(${(this.mood*20)/2}, 0, ${20}))`
   },
   methods: {
-    callBall() {
-      this.doFade = false;
+    callBall() { // when magic8ball clicked
+      this.doFade = false; // stop fade
+      // generate random message
       var randomNum =  Math.round(genRandomNum(0, potentialResults.length-1));
       var toDisplay = potentialResults[randomNum];
+
+      // update mood/background
       this.mood = randomNum;
       this.background = `linear-gradient(to bottom left, rgb(${this.mood*30}, 0, ${140}), rgb(${(this.mood*30)/2}, 0, ${20}))`
-      this.result = toDisplay;
-      var self = this;
-      setTimeout(function() {
-        self.doFade = true;
+
+      this.result = toDisplay; // display result
+
+      var self = this; // store vue instance
+      setTimeout(function() { // wait 1ms (idk why tho, ask 1:00am me)
+        self.doFade = true; // fade in
       }, 1)
     }
   }
@@ -69,6 +76,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+/* # containers # */
+
 body {
   margin: 0;
   padding: 0;
@@ -85,6 +95,8 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+/* # super cool css to make ball look good # */
 
 #ball {
   width: 80vh;
@@ -117,22 +129,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-#result {
-  color: white;
-  width: 12vh;
-  text-align: center;
-  font-family: sans-serif;
-  margin-top: -3vh;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.fadeInClass {
-  animation: fadeIn 2s;
-}
 
 #triangle {
   display: flex;
@@ -144,6 +140,27 @@ body {
   width: 25vh;
   height: 20vh;
   margin-top: 6vh;
+}
+
+/* # text # */
+
+#result {
+  color: white;
+  width: 12vh;
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: -3vh;
+}
+
+/* # animation # */
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fadeInClass {
+  animation: fadeIn 2s;
 }
 
 </style>
