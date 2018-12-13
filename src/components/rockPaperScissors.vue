@@ -230,6 +230,10 @@ body {
   background: linear-gradient(to right, #b266b2, #bf7fbf);
 }
 
+#resetContainer button:hover {
+  background: linear-gradient(to right, #b266ff, #bf7fff);
+}
+
 .card {
   width: 10vw;
   height: 40vh;
@@ -285,4 +289,15 @@ h1 {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+@media only screen and (max-width: 600px) {
+  #resetContainer button {
+    width: 50vw;
+  }
+
+  #ally h2, #enemy h2 {
+    margin-bottom: 2vh;
+  }
+}
+
 </style>
