@@ -233,16 +233,24 @@ textarea {
 
 button {
   height: 5vh;
-  width: 5vw;
+  width: auto;
   background: white;
   border: 0;
   border-radius: 0;
   margin: 1vw;
+  padding: 1vh;
 }
 
 input[type="file"] {
   margin-top: 1.5vw;
   color: white;
+}
+
+@media only screen and (max-width: 800px) {
+  .subCipher {
+    margin-top: 5vh;
+    display: block;
+  }
 }
 
 </style>
