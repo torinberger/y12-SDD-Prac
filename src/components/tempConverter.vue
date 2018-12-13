@@ -153,4 +153,11 @@ input {
   text-align: center;
   font-size: 4vh;
 }
+
+@media only screen and (max-width: 800px) {
+  .content-container {
+    width: 80vw;
+  }
+}
+
 </style>
