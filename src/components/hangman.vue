@@ -15,13 +15,13 @@
 
       <!-- dynamically display the correct hangman diagram dependent on lives -->
       <div id="image-container">
-        <img v-if="lives == 6" src="../assets/hangman/Hangman-0.png" alt="">
-        <img v-if="lives == 5" src="../assets/hangman/Hangman-1.png" alt="">
-        <img v-if="lives == 4" src="../assets/hangman/Hangman-2.png" alt="">
-        <img v-if="lives == 3" src="../assets/hangman/Hangman-3.png" alt="">
-        <img v-if="lives == 2" src="../assets/hangman/Hangman-4.png" alt="">
-        <img v-if="lives == 1" src="../assets/hangman/Hangman-5.png" alt="">
-        <img v-if="lives == 0" src="../assets/hangman/Hangman-6.png" alt="">
+        <img class="hang-image" v-if="lives == 6" src="../assets/hangman/Hangman-0.png" alt="">
+        <img class="hang-image" v-if="lives == 5" src="../assets/hangman/Hangman-1.png" alt="">
+        <img class="hang-image" v-if="lives == 4" src="../assets/hangman/Hangman-2.png" alt="">
+        <img class="hang-image" v-if="lives == 3" src="../assets/hangman/Hangman-3.png" alt="">
+        <img class="hang-image" v-if="lives == 2" src="../assets/hangman/Hangman-4.png" alt="">
+        <img class="hang-image" v-if="lives == 1" src="../assets/hangman/Hangman-5.png" alt="">
+        <img class="hang-image" v-if="lives == 0" src="../assets/hangman/Hangman-6.png" alt="">
       </div>
 
       <!-- display hidden word and slowly reveal -->
@@ -323,6 +323,9 @@ export default { // vue instance
   margin: 5px;
   background: black;
   color: white;
+  height: auto;
+  width: auto;
+  padding: 0.5vh;
 }
 
 #score-container button:hover {
@@ -331,7 +334,7 @@ export default { // vue instance
 
 #new-game-container button {
   width: 20vw;
-  height: 2vw;
+  height: auto;
   font-size: 3vh;
   border-radius: 2px;
   margin: 5px;
@@ -345,7 +348,7 @@ export default { // vue instance
 
 .key {
   width: 5vw;
-  height: 2vw;
+  height: auto;
   border-radius: 2px;
   margin: 5px;
   font-size: 3vh;
@@ -372,6 +375,31 @@ h1 {
 
 #word {
   text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+  #keys-container {
+    display: block;
+    text-align: center;
+  }
+
+  .key {
+    padding: 0.5vw;
+  }
+
+  .hang-image {
+    height: 20vh;
+    width: 20vh;
+  }
+
+  h1, #word, h2 {
+    font-size: 3vh;
+  }
+
+  #new-game-container button {
+    font-size: 3vw;
+  }
+
 }
 
 </style>
