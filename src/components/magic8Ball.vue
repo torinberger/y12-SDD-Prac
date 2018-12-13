@@ -99,8 +99,8 @@ body {
 /* # super cool css to make ball look good # */
 
 #ball {
-  width: 80vh;
-  height: 80vh;
+  width: 40vw;
+  height: 40vw;
   background: radial-gradient(#282828, black);
   border-radius: 50%;
   display: flex;
@@ -109,8 +109,8 @@ body {
 }
 
 #viewHole {
-  width: 35vh;
-  height: 35vh;
+  width: 17vw;
+  height: 17vw;
   background: black;
   border-radius: 50%;
   display: flex;
@@ -120,8 +120,8 @@ body {
 }
 
 #resultHole {
-  width: 30vh;
-  height: 30vh;
+  width: 15vw;
+  height: 15vw;
   background: black;
   border-radius: 50%;
   border: 3px solid #3d3d3d;
@@ -137,8 +137,8 @@ body {
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   background: #2980b9;
-  width: 25vh;
-  height: 20vh;
+  width: 13vw;
+  height: 9vw;
   margin-top: 6vh;
 }
 
@@ -161,6 +161,30 @@ body {
 
 .fadeInClass {
   animation: fadeIn 2s;
+}
+
+@media only screen and (max-width: 600px) {
+  #ball {
+    width: 80vw;
+    height: 80vw;
+  }
+
+  #viewHole {
+    width: 36vw;
+    height: 36vw;
+  }
+
+  #resultHole {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  #triangle {
+    width: 26vw;
+    height: 18vw;
+    margin-top: 3vh;
+    font-size: 1.5vh;
+  }
 }
 
 </style>
